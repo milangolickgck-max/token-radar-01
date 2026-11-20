@@ -3,7 +3,7 @@
 // The program reads the sealed snapshot from /input/snapshot.json (or --input <file|dir>), scores
 // every rankable pre-token protocol with the radar-2 model in lib/model.ts, writes the ranked board
 // to /output/board.json, and copies this repository's dashboard/ and screenshots/ to /output. Last,
-// it writes /output/dossier.json, the summary the judge reads, with the vendored make.fun library.
+// it writes /output/dossier.json, the summary the judge reads, using the dossier builder in lib/dossier.ts.
 //
 // The dashboard is a static page, no framework and no network: dashboard/index.html, dashboard/
 // app.css and dashboard/app.js read /output/data.js, which this program writes from the same board.
@@ -15,7 +15,7 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, statSyn
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { boardIssue, buildRadar, dataScript, parseSnapshot } from './lib/model.ts';
-import { buildDossier } from './vendor/makefun-board.ts';
+import { buildDossier } from './lib/dossier.ts';
 
 const here = fileURLToPath(new URL('.', import.meta.url));
 
